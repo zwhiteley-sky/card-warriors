@@ -20,6 +20,14 @@ module.exports = {
       }
     });
 
+    queryInterface.addIndex("Users", ["username"], {
+      unique: true
+    });
+
+    queryInterface.addIndex("Users", ["email"], {
+      unique: true
+    });
+
     await queryInterface.createTable("Cards", {
       id: {
         allowNull: false,
@@ -59,8 +67,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('UserCards');
     await queryInterface.dropTable('Users');
     await queryInterface.dropTable('Cards');
-    await queryInterface.dropTable('UserCards');
   }
 };
