@@ -1,0 +1,12 @@
+{
+  "name": "card-warrior-backend",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-http-proxy": "^2.0.0",
+    "sequelize": "^6.33.0",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.1"
+  }
+}
