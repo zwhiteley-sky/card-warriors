@@ -11,7 +11,6 @@ const auth_error = create_error.bind(this, AUTH);
  */
 const USERNAME_TAKEN = 0;
 
-
 /**
  * The email the client is trying to register with is
  * already associated with another user.

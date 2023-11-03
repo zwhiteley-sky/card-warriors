@@ -14,6 +14,11 @@ const AUTH = 1;
 const BAD_REQUEST = 0;
 
 /**
+ * You must be authenticated to make this request.
+ */
+const AUTH_REQUIRED = 1;
+
+/**
  * Creates an error code from a primary error code (describing
  * from which "area" the error originates, e.g., authentication)
  * and a secondary error code (specifying what exactly went
@@ -73,5 +78,6 @@ module.exports = {
     bad_request,
     AUTH,
     GENERAL,
-    BAD_REQUEST
+    BAD_REQUEST,
+    AUTH_REQUIRED
 };
