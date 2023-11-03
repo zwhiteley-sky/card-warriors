@@ -122,6 +122,22 @@ auth_router.post("/register", async (req, res) => {
 });
 
 /**
+ * Verify an authentication token.
+ * @param {string} token - The token to be verified.
+ * @returns The user id, if applicable.
+ */
+function verify_token(token) {
+    try {
+        if (token) {
+            const payload = jwt.verify(token, Buffer.from(process.env.JWT_KEY, "base64"));
+            return payload.id;
+        }
+    } catch {
+        return undefined;
+    }
+}
+
+/**
  * Handle and validate the `Authorization` header on requests
  * (extracting the user id in the process).
  * 
@@ -133,17 +149,13 @@ auth_router.post("/register", async (req, res) => {
 function token_handler(req, _, next) {
     const token = req.headers["authorization"];
 
-    try {
-        if (token) {
-            const payload = jwt.verify(token, Buffer.from(process.env.JWT_KEY, "base64"));
-            req.user_id = payload.id;
-        }
-    } finally {
-        next();
-    }
+    const user_id = verify_token(token);
+    if (user_id) req.user_id = user_id;
+    next();
 }
 
 module.exports = { 
     auth_router,
+    verify_token,
     token_handler
 };
